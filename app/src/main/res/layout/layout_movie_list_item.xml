@@ -42,6 +42,7 @@
                 android:id="@+id/container1"
                 >
             <TextView
+                android:text="test_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/movie_title"
@@ -50,6 +51,7 @@
                     />
 
             <TextView
+                android:text="test_start_actors"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/movie_star_actors"

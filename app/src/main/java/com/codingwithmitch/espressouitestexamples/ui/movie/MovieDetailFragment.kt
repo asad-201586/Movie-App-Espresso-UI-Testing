@@ -21,16 +21,19 @@ constructor(
 
     private val TAG: String = "AppDebug"
 
-    private lateinit var movie: Movie
+    private var movie: Movie? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let { args ->
-            args.getInt("movie_id").let{ movieId ->
-                moviesDataSource.getMovie(movieId)?.let{ movieFromRemote ->
-                    movie = movieFromRemote
+            if (arguments != null && arguments!!.containsKey("movie_id")){
+                args.getInt("movie_id").let{ movieId ->
+                    moviesDataSource.getMovie(movieId)?.let{ movieFromRemote ->
+                        movie = movieFromRemote
+                    }
                 }
             }
+
         }
     }
 
@@ -44,11 +47,13 @@ constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setMovieDetails()
+        if (movie != null)
+            setMovieDetails()
+        else return
 
         movie_directiors.setOnClickListener {
             val bundle = Bundle()
-            bundle.putStringArrayList("args_directors", movie.directors)
+            bundle.putStringArrayList("args_directors", movie?.directors)
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.container, DirectorsFragment::class.java, bundle)
                 ?.addToBackStack("DirectorsFragment")
@@ -57,7 +62,7 @@ constructor(
 
         movie_star_actors.setOnClickListener {
             val bundle = Bundle()
-            bundle.putStringArrayList("args_actors", movie.star_actors)
+            bundle.putStringArrayList("args_actors", movie?.star_actors)
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.container, StarActorsFragment::class.java, bundle)
                 ?.addToBackStack("StarActorsFragment")
@@ -68,10 +73,10 @@ constructor(
     private fun setMovieDetails(){
         Glide.with(this@MovieDetailFragment)
             .applyDefaultRequestOptions(requestOptions)
-            .load(movie.image)
+            .load(movie?.image)
             .into(movie_image)
-        movie_title.text = movie.title
-        movie_description.text = movie.description
+        movie_title.text = movie?.title
+        movie_description.text = movie?.description
     }
 
 }
