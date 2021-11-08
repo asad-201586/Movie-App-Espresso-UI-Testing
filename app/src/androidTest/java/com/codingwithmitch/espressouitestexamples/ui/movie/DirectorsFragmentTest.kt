@@ -33,7 +33,7 @@ class DirectorsFragmentTest{
 
         // VERIFY
         onView(withId(R.id.directors_text))
-            .check(matches(withText(verifyDirectorsValue.toString())))
+            .check(matches(withText(verifyDirectorsValue)))
     }
 }
 

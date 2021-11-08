@@ -21,7 +21,7 @@ import org.junit.runners.MethodSorters
 @RunWith(AndroidJUnit4ClassRunner::class)
 class MovieListFragmentTest{
 
-    val LIST_ITEM_IN_TEST = 4
+    val LIST_ITEM_IN_TEST = 1
     val MOVIE_IN_TEST = FakeMovieData.movies[LIST_ITEM_IN_TEST]
 
     @get:Rule

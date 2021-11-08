@@ -10,7 +10,6 @@ import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.bumptech.glide.request.RequestOptions
 import com.codingwithmitch.espressouitestexamples.R
 import com.codingwithmitch.espressouitestexamples.data.FakeMovieData.movies
-import com.codingwithmitch.espressouitestexamples.data.Movie
 import com.codingwithmitch.espressouitestexamples.data.source.MoviesRemoteDataSource
 import com.codingwithmitch.espressouitestexamples.factory.MovieFragmentFactory
 import io.mockk.every
@@ -26,20 +25,6 @@ class MovieDetailFragmentTest{
     fun test_recreateActivity() {
 
         // SETUP
-//        val movieId = 1
-//        val title = "The Rundown"
-//        val description = "A tough aspiring chef is hired to bring home a mobster's son from the Amazon but " +
-//                "becomes involved in the fight against an oppressive town operator and the search " +
-//                "for a legendary treasure."
-//        val movie = Movie(
-//            movieId,
-//            title,
-//            "https://nyc3.digitaloceanspaces.com/open-api-spaces/open-api-static/blog/1/The_Rundown-the_rundown.png",
-//            description ,
-//            arrayListOf("R.J. Stewart", "James Vanderbilt"),
-//            arrayListOf("Dwayne Johnson", "Seann William Scott", "Rosario Dawson", "Christopher Walken")
-//        )
-
         val movie = movies[1]
 
         val moviesDataSource = mockk<MoviesRemoteDataSource>()
@@ -73,20 +58,6 @@ class MovieDetailFragmentTest{
     fun test_isMovieDataVisible() {
 
         // SETUP
-//        val movieId = 1
-//        val title = "The Rundown"
-//        val description = "A tough aspiring chef is hired to bring home a mobster's son from the Amazon but " +
-//                "becomes involved in the fight against an oppressive town operator and the search " +
-//                "for a legendary treasure."
-//        val movie = Movie(
-//            movieId,
-//            title,
-//            "https://nyc3.digitaloceanspaces.com/open-api-spaces/open-api-static/blog/1/The_Rundown-the_rundown.png",
-//            description ,
-//            arrayListOf("R.J. Stewart", "James Vanderbilt"),
-//            arrayListOf("Dwayne Johnson", "Seann William Scott", "Rosario Dawson", "Christopher Walken")
-//        )
-
         val movie = movies[0]
 
         // NOTE:
