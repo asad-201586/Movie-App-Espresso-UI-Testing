@@ -1,13 +1,19 @@
 package com.codingwithmitch.espressouitestexamples.ui.movie
 
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.input
 import com.codingwithmitch.espressouitestexamples.R
 import com.codingwithmitch.espressouitestexamples.data.FakeMovieData.FAKE_NETWORK_DELAY
 import com.codingwithmitch.espressouitestexamples.data.Movie
@@ -15,6 +21,7 @@ import com.codingwithmitch.espressouitestexamples.data.source.MoviesDataSource
 import com.codingwithmitch.espressouitestexamples.ui.UICommunicationListener
 import com.codingwithmitch.espressouitestingexamples.util.EspressoIdlingResource
 import com.codingwithmitch.espressouitestexamples.util.TopSpacingItemDecoration
+import kotlinx.android.synthetic.main.custom_dialog.*
 import kotlinx.android.synthetic.main.fragment_movie_list.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -55,6 +62,29 @@ class MovieListFragment(
 
         initRecyclerView()
         getData()
+        dialogClick()
+    }
+
+    private fun dialogClick() {
+        button_dialog.setOnClickListener {
+
+            val dialog = Dialog(requireContext())
+            dialog.setContentView(R.layout.custom_dialog)
+
+            val edt = dialog.findViewById<AppCompatEditText>(R.id.edt_enter_your_name)
+
+            dialog.findViewById<TextView>(R.id.text_ok).setOnClickListener {
+                if (edt.text.toString().isNotEmpty()){
+                    val text = edt.text.toString()
+                    button_dialog.text = text
+                    dialog.dismiss()
+                    buildToastMessage(text)
+
+                }
+            }
+
+            dialog.show()
+        }
     }
 
     private fun getData(){
@@ -89,6 +119,10 @@ class MovieListFragment(
         }catch (e: ClassCastException){
             Log.e(TAG, "Must implement interface in $activity: ${e.message}")
         }
+    }
+
+    fun buildToastMessage(message: String){
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 }
 
